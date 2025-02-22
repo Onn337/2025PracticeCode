@@ -1,0 +1,61 @@
+// # Light Switch Problem 
+// This program solves the lightswitch problem.
+// n number of lights are turned off and the same number of people take turns flipping switches.
+// The n-th person switches every n switches.
+// Ex: The first person flips every switch, the second person flips every second switch, 98th flips every 98, etc.
+
+import java.util.Arrays;
+import java.time.LocalDateTime;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Start of Program");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        System.out.println("Current date and time: " + currentDateTime);
+        int[] Array = new int[100];
+        Arrays.fill(Array, 0); // initializes all to zero
+        System.out.println(Array.length);
+        System.out.println(Arrays.toString(Array)); // prints initial array;
+        switching(Array);
+        System.out.println(Arrays.toString(Array)); // prints final array;
+        System.out.println("The number of lights turned on is: " + count(Array));
+        arrPositions(Array, count(Array));
+        System.out.println("End of Program");
+    }
+    public static int count(int[] Array) {
+        int Count = 0;
+        for(int i=0;i<Array.length; i++) {
+            if (Array[i] == 1) {
+                Count++;
+            }
+        }
+        return Count;
+    }
+    public static void switching(int[] Array) {
+        for(int i=0;i< Array.length;i++) { // loop through each person
+            int m = i+1; // how many get skipped each time
+            for(int j=0;j< Array.length;j +=m ) { // each person loops through each lightbulb
+                if (Array[j] == 1) {
+                    Array[j] = 0;
+                } else if (Array[j] == 0) {
+                    Array[j] = 1; // increment the number skipped by each person
+                }
+            }
+        }
+    }
+    public static void arrPositions(int[] Array, int count) {
+        int[] arrpos = new int[count];
+        int loc = 0; // incrementing through Array positions
+        int pos = 0; // increment arrpos array
+        for (int i=0;i<Array.length;i++) {
+            if (Array[i] == 1) {
+                arrpos[pos] = i+1; //starting at 1 (not 0-indexed).
+                pos++;
+            }
+        }
+        System.out.println("The positions of the lights turned on are: " + Arrays.toString(arrpos));
+    }
+    public String toString() {
+        return(" ");
+    }
+}
